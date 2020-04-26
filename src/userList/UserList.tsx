@@ -19,17 +19,13 @@ const useUsersState = () => {
   const [search, setSearch] = useState<string>("")
 
   useEffect(() => {
-    GET("users").then((response) => setUsers(response.data))
-  }, [])
-
-  useEffect(() => {
     const abortController = new AbortController()
 
-    if (search.length > 0) {
-      GET("users", abortController.signal).then((response) =>
-        setUsers(response.data)
-      )
-    }
+    GET(
+      "users",
+      abortController.signal,
+      search && { first_name: search }
+    ).then((response) => setUsers(response.data))
 
     return () => abortController.abort()
   }, [search])
@@ -44,16 +40,14 @@ const useUsersState = () => {
 const UserList = () => {
   const { users, search, setSearch } = useUsersState()
 
+  const onSearchChange = (event: ChangeEvent<HTMLInputElement>) =>
+    setSearch(event.target.value)
+
   return (
     <UserListContainer>
       <Header>
         <h1>User list</h1>
-        <input
-          value={search}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setSearch(event.target.value)
-          }
-        />
+        <input value={search} onChange={onSearchChange} />
       </Header>
 
       {users.map((user, index) => (

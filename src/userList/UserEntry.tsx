@@ -15,7 +15,7 @@ const UserEntryContainer = styled.div`
 const UserEntry = (props: UserEntryProps) => {
   return (
     <UserEntryContainer>
-      {`${props.orderNumber}. ${props.user.first_name} @${props.user.email}`}
+      {`${props.orderNumber}. ${props.user.first_name} ${props.user.email}`}
     </UserEntryContainer>
   )
 }
