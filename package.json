@@ -1,5 +1,5 @@
 {
-  "name": "debouncing",
+  "name": "abort_request",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
