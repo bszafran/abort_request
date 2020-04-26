@@ -1,5 +1,5 @@
-const mockedUsers = require("./mockedData")
+const users = require("./mockedData")
 
 module.exports = () => {
-  return { users: mockedUsers }
+  return users
 }
